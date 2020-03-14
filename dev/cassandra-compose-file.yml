@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    volumes:
+      - "cassandra:/var/lib/cassandra"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: '3G'
+        reservations:
+          memory: '3G'
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.labels.usage==storage
+          - node.labels.type==large
+          - node.labels.database==cassandra
+
+volumes:
+  cassandra:
