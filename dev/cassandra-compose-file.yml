@@ -6,6 +6,8 @@ services:
       - "9042:9042"
     volumes:
       - "cassandra:/var/lib/cassandra"
+    networks:
+      - cassandra
     deploy:
       replicas: 1
       resources:
@@ -23,3 +25,7 @@ services:
 
 volumes:
   cassandra:
+
+networks:
+  cassandra:
+    driver: overlay

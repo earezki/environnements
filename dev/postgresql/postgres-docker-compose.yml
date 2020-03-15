@@ -2,10 +2,10 @@ version: '3.7'
 services:
   postgres:
     image: postgres
-    ports:
-      - "5432:5432"
     volumes:
-      - "postgres:/var/lib/postgres"
+      - "postgres:/var/lib/postgresql/data"
+    networks:
+      - postgres
     deploy:
       replicas: 1
       resources:
@@ -28,9 +28,15 @@ services:
     image: adminer
     ports:
       - 8010:8080
+    networks:
+      - postgres
     environment:
       - ADMINER_DEFAULT_SERVER=postgres
       - ADMINER_DESIGN=nette
 
 volumes:
   postgres:
+
+networks:
+  postgres:
+    driver: overlay
