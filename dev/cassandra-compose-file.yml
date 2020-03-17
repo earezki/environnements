@@ -9,7 +9,7 @@ services:
     networks:
       - cassandra
     deploy:
-      replicas: 1
+      mode: global
       resources:
         limits:
           memory: '3G'
@@ -28,4 +28,3 @@ volumes:
 
 networks:
   cassandra:
-    driver: overlay

@@ -7,7 +7,7 @@ services:
     networks:
       - postgres
     deploy:
-      replicas: 1
+      mode: global
       resources:
         limits:
           memory: '2G'
